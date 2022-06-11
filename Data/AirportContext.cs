@@ -5,9 +5,9 @@ namespace Data
 {
     public partial class AirportContext : DbContext
     {
-        public AirportContext()
-        {
-        }
+        //public AirportContext()
+        //{
+        //}
 
         public AirportContext(DbContextOptions<AirportContext> options)
             : base(options)
