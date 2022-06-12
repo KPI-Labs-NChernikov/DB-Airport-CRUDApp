@@ -2,7 +2,6 @@ using Business;
 using Business.Interfaces;
 using Business.Services;
 using Data;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 
@@ -16,6 +15,7 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 builder.Services.AddScoped<IVisaService, VisaService>();
 builder.Services.AddScoped<IBaggageService, BaggageService>();
 builder.Services.AddScoped<ITicketService, TicketService>();
+builder.Services.AddScoped<ITerminalService, TerminalService>();
 
 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
 

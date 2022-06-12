@@ -11,6 +11,7 @@ namespace Business.Models
         public string Name { get; set; } = string.Empty;
 
         [Required]
+        [Display(Name = "International")]
         public bool IsInternational { get; set; }
     }
 }
