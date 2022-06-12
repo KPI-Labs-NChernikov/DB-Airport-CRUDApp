@@ -5,14 +5,9 @@ namespace Data
 {
     public partial class AirportContext : DbContext
     {
-        //public AirportContext()
-        //{
-        //}
-
         public AirportContext(DbContextOptions<AirportContext> options)
             : base(options)
-        {
-        }
+        {        }
 
         public virtual DbSet<Baggage> Baggages { get; set; } = null!;
         public virtual DbSet<Flight> Flights { get; set; } = null!;
@@ -21,16 +16,6 @@ namespace Data
         public virtual DbSet<Terminal> Terminals { get; set; } = null!;
         public virtual DbSet<Ticket> Tickets { get; set; } = null!;
         public virtual DbSet<Visa> Visas { get; set; } = null!;
-
-        //Conncetion string: Server=DESKTOP-AKCV001\\SQLEXPRESS;Database=IS02_30_Airport;Trusted_Connection=True;
-//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//        {
-//            if (!optionsBuilder.IsConfigured)
-//            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//                optionsBuilder.UseSqlServer("Server=DESKTOP-AKCV001\\SQLEXPRESS;Database=IS02_30_Airport;Trusted_Connection=True;");
-//            }
-//        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

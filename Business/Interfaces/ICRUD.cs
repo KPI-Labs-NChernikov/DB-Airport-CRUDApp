@@ -4,7 +4,7 @@
     {
         IEnumerable<TModel> GetAll();
 
-        Task<TModel> GetByIdAsync(int id);
+        Task<TModel?> GetByIdAsync(int id);
 
         Task AddAsync(TModel model);
 

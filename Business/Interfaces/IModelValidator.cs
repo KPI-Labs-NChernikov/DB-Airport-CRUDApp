@@ -19,7 +19,7 @@ namespace Business.Interfaces
             bool isValid = Validator.TryValidateObject(model, validationContext, validationResults, true);
             if (!isValid)
             {
-                errorMessage = string.Join($"{Environment.NewLine}", validationResults.Select(r => r.ErrorMessage));
+                errorMessage = string.Join(Environment.NewLine, validationResults.Select(r => r.ErrorMessage));
                 return false;
             }
             return true;
