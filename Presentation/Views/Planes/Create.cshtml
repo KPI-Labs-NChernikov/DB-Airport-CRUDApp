@@ -1,8 +1,8 @@
 ﻿@using Business.Models
-@model TerminalModel
+@model PlaneModel
 
 @{
-    var title = $"Edit a terminal {Model.Name}";
+    var title = "Create a plane";
     ViewData["Title"] = title;
 }
 
@@ -18,18 +18,23 @@
         <h2>@title</h2>
         <form method="post">
             <div class="form-group mb-3">
+                <label asp-for="RegistrationNumber" class="control-label"></label>
+                <input asp-for="RegistrationNumber" class="form-control"/>
+                <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control"/>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" asp-for="IsInternational"/>
-                <label class="form-check-label" asp-for="IsInternational"></label>
-                <span asp-validation-for="IsInternational" class="text-danger"></span>
+            <div class="form-group mb-3">
+                <label asp-for="Capacity" class="control-label"></label>
+                <input type="number" asp-for="Capacity" class="form-control"/>
+                <span asp-validation-for="Capacity" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <a asp-action="Index" class="btn btn-warning">Cancel changes</a>
+                <button type="submit" class="btn btn-primary">Add</button>
+                <a asp-action="Index" class="btn btn-warning">Cancel</a>
             </div>
         </form>
     </div>

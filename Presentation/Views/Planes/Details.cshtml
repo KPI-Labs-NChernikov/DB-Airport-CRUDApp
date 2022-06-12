@@ -1,0 +1,31 @@
+﻿@using Business.Models
+@model PlaneModel
+
+@{
+    ViewData["Title"] = $"Plane {Model.RegistrationNumber}";
+}
+
+<div class="row py-3">
+    <div class="col-8 offset-2">
+                @if (!(TempData[Constants.SuccessFieldName] is null))
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+  @TempData[Constants.SuccessFieldName]
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}
+    <h5 class="d-flex justify-content-between">
+        <span>Plane: @Model.RegistrationNumber</span>
+        <span>
+            <a class="btn btn-primary" title="edit" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+            <a class="btn btn-danger" title="delete" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+        </span>
+    </h5>
+    <p>Registration number: @Model.RegistrationNumber<br />
+        Name: @Model.Name<br />
+        Capacity: @Model.Capacity</p>
+            <div>
+    <a class="btn btn-primary" asp-action="Index" title="go back">Back</a>
+  </div>
+  </div>
+</div>

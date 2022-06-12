@@ -1,8 +1,8 @@
 ﻿@using Business.Models
-@model IEnumerable<BaggageModel>
+@model IEnumerable<PlaneModel>
 
 @{
-    var title = "Baggages";
+    var title = "Planes";
     ViewData["Title"] = title;
 }
 
@@ -16,26 +16,20 @@
 </div>
 }
         <h2>@title</h2>
-        @foreach(var baggage in Model)
+        @foreach(var plane in Model)
         {
             <div class="card">
   <div class="card-body">
     <h5 class="card-title d-flex justify-content-between">
-        <span><a title="to baggage page" asp-action="Details" asp-route-id="@baggage.Id">Baggage</a></span>
+        <span><a title="to plane page" asp-action="Details" asp-route-id="@plane.Id">Plane: @plane.RegistrationNumber</a></span>
         <span>
-            <a class="btn btn-primary btn-sm" title="edit" asp-action="Edit" asp-route-id="@baggage.Id">Edit</a>
-            <a class="btn btn-danger btn-sm" title="delete" asp-action="Delete" asp-route-id="@baggage.Id">Delete</a>
+            <a class="btn btn-primary btn-sm" title="edit" asp-action="Edit" asp-route-id="@plane.Id">Edit</a>
+            <a class="btn btn-danger btn-sm" title="delete" asp-action="Delete" asp-route-id="@plane.Id">Delete</a>
         </span>
     </h5>
-    @{
-        var volume = $"{baggage.Volume:F4}";
-        var weight = $"{baggage.Weight:F4}";
-        var price = $"{baggage.Price:F2}";
-    }
-    <p class="card-text">Volume: @volume m^3<br />
-        Weight: @weight kg<br />
-        Price: @price UAH<br>
-        Ticket Id: @baggage.TicketId</p>
+    <p class="card-text">Registration number: @plane.RegistrationNumber<br />
+        Name: @plane.Name<br />
+        Capacity: @plane.Capacity</p>
   </div>
 </div>
         }
