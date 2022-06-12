@@ -1,0 +1,46 @@
+﻿@using Business.Models
+@model FlightModel
+
+@{
+    var title = $"Edit a flight {Model.Id}";
+    ViewData["Title"] = title;
+}
+
+<div class="row py-3">
+    <div class="col-8 offset-2">
+        @if (!(TempData[Constants.ErrorFieldName] is null))
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  @TempData[Constants.ErrorFieldName]
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}
+        <h2>@title</h2>
+        <form method="post">
+            <div class="form-group mb-3">
+                <label asp-for="To" class="control-label"></label>
+                <input asp-for="To" class="form-control"/>
+                <span asp-validation-for="To" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control"/>
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="PlaneId" class="control-label"></label>
+                <input type="number" asp-for="PlaneId" class="form-control"/>
+                <span asp-validation-for="PlaneId" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="TerminalId" class="control-label"></label>
+                <input type="number" asp-for="TerminalId" class="form-control"/>
+                <span asp-validation-for="TerminalId" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a asp-action="Index" class="btn btn-warning">Cancel changes</a>
+            </div>
+        </form>
+    </div>
+</div>

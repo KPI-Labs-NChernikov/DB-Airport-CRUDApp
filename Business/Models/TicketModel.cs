@@ -6,7 +6,7 @@ namespace Business.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         [StringLength(20, ErrorMessage = "The code is too long")]
         public string Code { get; set; } = string.Empty;
         [Range(0, double.PositiveInfinity, ErrorMessage = "The value should be positive or equal 0")]

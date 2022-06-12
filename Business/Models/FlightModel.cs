@@ -6,8 +6,9 @@ namespace Business.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         [StringLength(100, ErrorMessage = "The destination name is too long")]
+        [Display(Name = "Destination")]
         public string To { get; set; } = string.Empty;
 
         [Required]

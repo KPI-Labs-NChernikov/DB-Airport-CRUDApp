@@ -6,18 +6,18 @@ namespace Business.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         [StringLength(20, ErrorMessage = "The passport code is too long")]
         [Display(Name = "Passport code")]
         public string PassportCode { get; set; } = string.Empty;
 
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         [StringLength(50, ErrorMessage = "The first name is too long")]
         [Display(Name = "First name")]
         public string FirstName { get; set; } = string.Empty;
 
         [StringLength(50, ErrorMessage = "The last name is too long")]
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         [Display(Name = "Last name")]
         public string LastName { get; set; } = string.Empty;
 

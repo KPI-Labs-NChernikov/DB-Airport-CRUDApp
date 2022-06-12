@@ -6,12 +6,12 @@ namespace Business.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         [StringLength(10, ErrorMessage = "The registration number is too long")]
         [Display(Name = "Registration number")]
         public string RegistrationNumber { get; set; } = string.Empty;
 
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         [StringLength(50, ErrorMessage = "The name is too long")]
         public string Name { get; set; } = string.Empty;
 
