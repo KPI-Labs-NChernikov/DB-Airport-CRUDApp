@@ -27,11 +27,8 @@
             <a class="btn btn-danger btn-sm" title="delete" asp-action="Delete" asp-route-id="@terminal.Id">Delete</a>
         </span>
     </h5>
-                    @{
-                        var isInternational = terminal.IsInternational ? "Yes" : "No";
-                    }
                     <p class="card-text">Name: @terminal.Name<br />
-        International: @isInternational<br /></p>
+        International: @terminal.IsInternational.ToYesNoString()<br /></p>
   </div>
 </div>
         }

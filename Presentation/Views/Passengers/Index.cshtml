@@ -1,0 +1,48 @@
+﻿@using Business.Models
+@model IEnumerable<PassengerModel>
+
+@{
+    var title = "Passengers";
+    ViewData["Title"] = title;
+}
+
+<div class="row">
+    <div class="col-8 offset-2 d-flex flex-column gap-3">
+                        @if (!(TempData[Constants.SuccessFieldName] is null))
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+  @TempData[Constants.SuccessFieldName]
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}
+        <h2>@title</h2>
+        @foreach(var passenger in Model)
+        {
+            <div class="card">
+  <div class="card-body">
+    <h5 class="card-title d-flex justify-content-between">
+        <span><a title="to passenger's page" asp-action="Details" asp-route-id="@passenger.Id">Passenger: @passenger.FullName</a></span>
+        <span>
+            <a class="btn btn-primary btn-sm" title="edit" asp-action="Edit" asp-route-id="@passenger.Id">Edit</a>
+            <a class="btn btn-danger btn-sm" title="delete" asp-action="Delete" asp-route-id="@passenger.Id">Delete</a>
+        </span>
+    </h5>
+    <p class="card-text">Passport code: @passenger.PassportCode<br />
+        First name: @passenger.FirstName<br />
+        Last name: @passenger.LastName<br />
+        @if(passenger.Patronymic != null)
+                        {
+                            <span>Patronymic: @passenger.Patronymic<br /></span>
+                        }
+        Birth date: @passenger.BirthDate.ToShortDateString()<br />
+        Internally wanted: @passenger.InternallyWanted.ToYesNoString()<br />
+        Internationally wanted: @passenger.InternationallyWanted.ToYesNoString()
+        </p>
+  </div>
+</div>
+        }
+        <div class="d-grid">
+  <a class="btn btn-primary" title="add" asp-action="Create">Add</a>
+</div>
+    </div>
+</div>

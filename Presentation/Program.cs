@@ -17,6 +17,7 @@ builder.Services.AddScoped<IBaggageService, BaggageService>();
 builder.Services.AddScoped<ITicketService, TicketService>();
 builder.Services.AddScoped<ITerminalService, TerminalService>();
 builder.Services.AddScoped<IPlaneService, PlaneService>();
+builder.Services.AddScoped<IPassengerService, PassengerService>();
 
 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
 

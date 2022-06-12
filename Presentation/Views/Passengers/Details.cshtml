@@ -1,8 +1,8 @@
 ﻿@using Business.Models
-@model TerminalModel
+@model PassengerModel
 
 @{
-    ViewData["Title"] = $"Terminal {Model.Name}";
+    ViewData["Title"] = $"Passenger {Model.FullName}";
 }
 
 <div class="row py-3">
@@ -15,14 +15,22 @@
 </div>
 }
     <h5 class="d-flex justify-content-between">
-        <span>Terminal: @Model.Name</span>
+        <span>Passenger: @Model.FullName</span>
         <span>
             <a class="btn btn-primary" title="edit" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
             <a class="btn btn-danger" title="delete" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
         </span>
     </h5>
-    <p>Name: @Model.Name<br />
-        International: @Model.IsInternational.ToYesNoString()<br /></p>
+    <p>Passport code: @Model.PassportCode<br />
+        First name: @Model.FirstName<br />
+        Last name: @Model.LastName<br />
+        @if(Model.Patronymic != null)
+                        {
+                            <span>Patronymic: @Model.Patronymic<br /></span>
+                        }
+        Birth date: @Model.BirthDate.ToShortDateString()<br />
+        Internally wanted: @Model.InternallyWanted.ToYesNoString()<br />
+        Internationally wanted: @Model.InternationallyWanted.ToYesNoString()</p>
             <div>
     <a class="btn btn-primary" asp-action="Index" title="go back">Back</a>
   </div>
