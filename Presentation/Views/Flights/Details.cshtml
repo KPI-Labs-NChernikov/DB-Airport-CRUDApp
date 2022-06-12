@@ -24,9 +24,9 @@
     <p>Destination: @Model.To<br />
         Date: @Model.Date<br />
         Plane Id: @Model.PlaneId<br />
-        Terminal Id: @Model.TerminalId</p>
+        <a title="Terminal" asp-controller="Terminals" asp-action="Details" asp-route-id="@Model.TerminalId">Terminal Id: @Model.TerminalId</a></p>
             <div>
-    <a class="btn btn-primary" asp-action="Index" title="go back">Back</a>
+    <a class="btn btn-primary" href="javascript:history.go(-1)" title="go back">Back</a>
   </div>
   </div>
 </div>

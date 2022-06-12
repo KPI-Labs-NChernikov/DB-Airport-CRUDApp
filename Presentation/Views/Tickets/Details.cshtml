@@ -24,10 +24,10 @@
 @{var price = $"{Model.Price:F2}";}
     <p>Price: @price UAH<br />
         Type: @Model.Type<br />
-        Passenger Id: @Model.PassengerId<br />
-        Flight Id: @Model.FlightId</p>
+        <a title="Passenger" asp-controller="Passengers" asp-action="Details" asp-route-id="@Model.PassengerId">Passenger Id: @Model.PassengerId</a><br />
+        <a title="Flight" asp-controller="Flights" asp-action="Details" asp-route-id="@Model.FlightId">Flight Id: @Model.FlightId</a></p>
             <div>
-    <a class="btn btn-primary" asp-action="Index" title="go back">Back</a>
+    <a class="btn btn-primary" href="javascript:history.go(-1)" title="go back">Back</a>
   </div>
   </div>
 </div>

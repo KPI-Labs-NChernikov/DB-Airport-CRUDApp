@@ -35,7 +35,7 @@
     <p class="card-text">Volume: @volume m^3<br />
         Weight: @weight kg<br />
         Price: @price UAH<br>
-        Ticket Id: @baggage.TicketId</p>
+        <a title="Ticket" asp-controller="Tickets" asp-action="Details" asp-route-id="@baggage.TicketId">Ticket Id: @baggage.TicketId</a></p>
   </div>
 </div>
         }
