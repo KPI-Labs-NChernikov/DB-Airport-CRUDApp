@@ -1,0 +1,46 @@
+﻿@using Business.Models
+@model BaggageModel
+
+@{
+    var title = $"Edit a baggage";
+    ViewData["Title"] = title;
+}
+
+<div class="row py-3">
+    <div class="col-8 offset-2">
+        @if (!(TempData[Constants.ErrorFieldName] is null))
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  @TempData[Constants.ErrorFieldName]
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}
+        <h2>@title</h2>
+        <form method="post">
+            <div class="form-group mb-3">
+                <label asp-for="Volume" class="control-label"></label>
+                <input asp-for="Volume" class="form-control"/>
+                <span asp-validation-for="Volume" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Weight" class="control-label"></label>
+                <input asp-for="Weight" class="form-control"/>
+                <span asp-validation-for="Weight" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control"/>
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="TicketId" class="control-label"></label>
+                <input type="number" asp-for="TicketId" class="form-control"/>
+                <span asp-validation-for="TicketId" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <button type="submit" class="btn btn-primary">Add</button>
+                <a asp-action="Index" class="btn btn-warning">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

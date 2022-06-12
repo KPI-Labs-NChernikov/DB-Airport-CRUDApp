@@ -25,9 +25,9 @@ namespace Data
 
                 entity.Property(e => e.Price).HasColumnType("money");
 
-                entity.Property(e => e.Volume).HasColumnType("decimal(18, 0)");
+                entity.Property(e => e.Volume).HasColumnType("decimal(18, 9)");
 
-                entity.Property(e => e.Weight).HasColumnType("decimal(18, 0)");
+                entity.Property(e => e.Weight).HasColumnType("decimal(18, 9)");
 
                 entity.HasOne(d => d.Ticket)
                     .WithMany(p => p.Baggages)
