@@ -1,0 +1,46 @@
+﻿@using Business.Models
+@model VisaModel
+
+@{
+    var title = "Create a visa";
+    ViewData["Title"] = title;
+}
+
+<div class="row py-3">
+    <div class="col-8 offset-2">
+        @if (!(TempData[Constants.ErrorFieldName] is null))
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  @TempData[Constants.ErrorFieldName]
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}
+        <h2>@title</h2>
+        <form method="post">
+            <div class="form-group mb-3">
+                <label asp-for="Code" class="control-label"></label>
+                <input asp-for="Code" class="form-control"/>
+                <span asp-validation-for="Code" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Issue" class="control-label"></label>
+                <input type="date" asp-for="Issue" class="form-control"/>
+                <span asp-validation-for="Issue" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Expiry" class="control-label"></label>
+                <input type="date" asp-for="Expiry" class="form-control"/>
+                <span asp-validation-for="Expiry" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="PassengerId" class="control-label"></label>
+                <input type="number" asp-for="PassengerId" class="form-control"/>
+                <span asp-validation-for="PassengerId" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <button type="submit" class="btn btn-primary">Add</button>
+                <a asp-action="Index" class="btn btn-warning">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -25,3 +25,7 @@ body {
     width: 1.5em !important;
     display: inline-block;
 }
+
+a {
+    text-decoration: none !important;
+}

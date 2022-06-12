@@ -23,6 +23,15 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.Use(async (context, next) =>                // Custom 404 page
+{
+    await next();
+    if (context.Response.StatusCode == 404)
+    {
+        context.Request.Path = "/Home/NotFoundPage";
+        await next();
+    }
+});
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

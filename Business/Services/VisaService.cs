@@ -31,6 +31,7 @@ namespace Business.Services
             bool isValid = IsValid(model, out string? error);
             if (!isValid)
                 throw new ArgumentException(error, nameof(model));
+            TransformModel(model);
             var mapped = _mapper.Map<Visa>(model);
             await _context.Visas.AddAsync(mapped);
             await _context.SaveChangesAsync();
@@ -50,6 +51,11 @@ namespace Business.Services
             return _mapper.Map<VisaModel>(await _context.Visas.FindAsync(id));
         }
 
+        private static void TransformModel(VisaModel model)
+        {
+            model.Code = model.Code.ToUpper();
+        }
+
         public bool IsValid(VisaModel model, out string? errorMessage)
         {
             var result = IModelValidator<VisaModel>.IsValidByDefault(model, out errorMessage);
@@ -67,6 +73,7 @@ namespace Business.Services
             bool isValid = IsValid(model, out string? error);
             if (!isValid)
                 throw new ArgumentException(error, nameof(model));
+            TransformModel(model);
             var existingModel = await GetNotMappedByIdAsync(model.Id);
             existingModel = _mapper.Map(model, existingModel);
             _context.Visas.Update(existingModel);
