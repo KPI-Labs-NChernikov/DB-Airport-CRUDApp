@@ -1,7 +1,9 @@
-﻿using Business.Interfaces;
+﻿using AutoMapper;
+using Business.Interfaces;
 using Business.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Presentation.Models;
 
 namespace Presentation.Controllers
 {
@@ -9,9 +11,34 @@ namespace Presentation.Controllers
     {
         private readonly ITicketService _service;
 
-        public TicketsController(ITicketService service)
+        private readonly IPassengerService _passengerService;
+
+        private readonly IFlightService _flightService;
+
+        private readonly IMapper _mapper;
+
+        public TicketsController(ITicketService service, IPassengerService passengerService, IFlightService flightService, IMapper mapper)
         {
             _service = service;
+            _passengerService = passengerService;
+            _flightService = flightService;
+            _mapper = mapper;
+        }
+
+        private void SetPassengers()
+        {
+            ViewBag.Passengers = _mapper.Map<IEnumerable<PassengerReduced>>(_passengerService.GetAll());
+        }
+
+        private void SetFlights()
+        {
+            ViewBag.Flights = _mapper.Map<IEnumerable<FlightReduced>>(_flightService.GetAll());
+        }
+
+        private void SetViewBag()
+        {
+            SetPassengers();
+            SetFlights();
         }
 
         public IActionResult Index()
@@ -29,6 +56,7 @@ namespace Presentation.Controllers
 
         public ActionResult Create()
         {
+            SetViewBag();
             return View();
         }
 
@@ -37,7 +65,10 @@ namespace Presentation.Controllers
         public async Task<IActionResult> Create(TicketModel model)
         {
             if (!ModelState.IsValid)
+            {
+                SetViewBag();
                 return View(model);
+            }
             try
             {
                 await _service.AddAsync(model);
@@ -46,11 +77,13 @@ namespace Presentation.Controllers
             }
             catch (DbUpdateException exc)
             {
+                SetViewBag();
                 TempData[Constants.ErrorFieldName] = exc.InnerException != null ? exc.InnerException.Message : exc.Message;
                 return View(model);
             }
             catch (ArgumentException exc)
             {
+                SetViewBag();
                 TempData[Constants.ErrorFieldName] = exc.Message;
                 return View(model);
             }
@@ -61,6 +94,7 @@ namespace Presentation.Controllers
             var model = await _service.GetByIdAsync(id);
             if (model is null)
                 return RedirectToAction("PageNotFound", "Home");
+            SetViewBag();
             return View(model);
         }
 
@@ -69,7 +103,10 @@ namespace Presentation.Controllers
         public async Task<IActionResult> Edit(int id, TicketModel model)
         {
             if (!ModelState.IsValid)
+            {
+                SetViewBag();
                 return View(model);
+            }
             model.Id = id;
             try
             {
@@ -79,11 +116,13 @@ namespace Presentation.Controllers
             }
             catch (DbUpdateException exc)
             {
+                SetViewBag();
                 TempData[Constants.ErrorFieldName] = exc.InnerException != null ? exc.InnerException.Message : exc.Message;
                 return View(model);
             }
             catch (ArgumentException exc)
             {
+                SetViewBag();
                 TempData[Constants.ErrorFieldName] = exc.Message;
                 return View(model);
             }

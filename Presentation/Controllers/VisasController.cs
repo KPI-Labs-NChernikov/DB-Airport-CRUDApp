@@ -1,7 +1,9 @@
-﻿using Business.Interfaces;
+﻿using AutoMapper;
+using Business.Interfaces;
 using Business.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Presentation.Models;
 
 namespace Presentation.Controllers
 {
@@ -9,9 +11,15 @@ namespace Presentation.Controllers
     {
         private readonly IVisaService _service;
 
-        public VisasController(IVisaService service)
+        private readonly IPassengerService _passengerService;
+
+        private readonly IMapper _mapper;
+
+        public VisasController(IVisaService service, IPassengerService passengerService, IMapper mapper)
         {
             _service = service;
+            _passengerService = passengerService;
+            _mapper = mapper;
         }
 
         // GET: VisasController
@@ -32,7 +40,13 @@ namespace Presentation.Controllers
         // GET: VisasController/Create
         public ActionResult Create()
         {
+            SetPassengers();
             return View();
+        }
+
+        private void SetPassengers()
+        {
+            ViewBag.Passengers = _mapper.Map<IEnumerable<PassengerReduced>>(_passengerService.GetAll());
         }
 
         // POST: VisasController/Create
@@ -41,7 +55,10 @@ namespace Presentation.Controllers
         public async Task<IActionResult> Create(VisaModel model)
         {
             if (!ModelState.IsValid)
+            {
+                SetPassengers();
                 return View(model);
+            }
             try
             {
                 await _service.AddAsync(model);
@@ -50,11 +67,13 @@ namespace Presentation.Controllers
             }
             catch (DbUpdateException exc)
             {
+                SetPassengers();
                 TempData[Constants.ErrorFieldName] = exc.InnerException != null ? exc.InnerException.Message : exc.Message;
                 return View(model);
             }
             catch (ArgumentException exc)
             {
+                SetPassengers();
                 TempData[Constants.ErrorFieldName] = exc.Message;
                 return View(model);
             }
@@ -66,6 +85,7 @@ namespace Presentation.Controllers
             var model = await _service.GetByIdAsync(id);
             if (model is null)
                 return RedirectToAction("PageNotFound", "Home");
+            SetPassengers();
             return View(model);
         }
 
@@ -75,7 +95,10 @@ namespace Presentation.Controllers
         public async Task<IActionResult> Edit(int id, VisaModel model)
         {
             if (!ModelState.IsValid)
+            {
+                SetPassengers();
                 return View(model);
+            }
             model.Id = id;
             try
             {
@@ -85,11 +108,13 @@ namespace Presentation.Controllers
             }
             catch (DbUpdateException exc)
             {
+                SetPassengers();
                 TempData[Constants.ErrorFieldName] = exc.InnerException != null ? exc.InnerException.Message : exc.Message;
                 return View(model);
             }
             catch (ArgumentException exc)
             {
+                SetPassengers();
                 TempData[Constants.ErrorFieldName] = exc.Message;
                 return View(model);
             }

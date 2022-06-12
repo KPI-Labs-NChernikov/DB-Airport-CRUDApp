@@ -17,7 +17,7 @@ namespace Business.Models
         public DateTime Expiry { get; set; }
 
         [Required]
-        [Display(Name = "Passenger Id")]
+        [Display(Name = "Passenger")]
         public int PassengerId { get; set; }
     }
 }

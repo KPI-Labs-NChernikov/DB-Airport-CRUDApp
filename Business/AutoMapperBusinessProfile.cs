@@ -4,9 +4,9 @@ using Data.Models;
 
 namespace Business
 {
-    public class AutoMapperProfile : Profile
+    public class AutoMapperBusinessProfile : Profile
     {
-        public AutoMapperProfile()
+        public AutoMapperBusinessProfile()
         {
             CreateMap<Baggage, BaggageModel>().ReverseMap();
             CreateMap<Flight, FlightModel>().ReverseMap();

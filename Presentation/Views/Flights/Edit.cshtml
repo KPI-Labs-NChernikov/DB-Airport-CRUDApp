@@ -1,4 +1,5 @@
 ﻿@using Business.Models
+@using Presentation.Interfaces
 @model FlightModel
 
 @{
@@ -28,14 +29,18 @@
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
-                <label asp-for="PlaneId" class="control-label"></label>
-                <input type="number" asp-for="PlaneId" class="form-control"/>
-                <span asp-validation-for="PlaneId" class="text-danger"></span>
+                            <label asp-for="PlaneId" class="control-label"></label>
+            <select asp-for="PlaneId" asp-items="@(new SelectList(ViewBag.Planes, nameof(IReducedModel.Id), nameof(IReducedModel.Info)))" class="form-select">
+                <option>Select an option</option>
+            </select>
+            <span asp-validation-for="PlaneId" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
-                <label asp-for="TerminalId" class="control-label"></label>
-                <input type="number" asp-for="TerminalId" class="form-control"/>
-                <span asp-validation-for="TerminalId" class="text-danger"></span>
+                            <label asp-for="TerminalId" class="control-label"></label>
+            <select asp-for="TerminalId" asp-items="@(new SelectList(ViewBag.Terminals, nameof(IReducedModel.Id), nameof(IReducedModel.Info)))" class="form-select">
+                <option>Select an option</option>
+            </select>
+            <span asp-validation-for="TerminalId" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
                 <button type="submit" class="btn btn-primary">Submit</button>

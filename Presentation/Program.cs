@@ -3,6 +3,7 @@ using Business.Interfaces;
 using Business.Services;
 using Data;
 using Microsoft.EntityFrameworkCore;
+using Presentation;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AirportContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Scoped);
-builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+builder.Services.AddAutoMapper(typeof(AutoMapperBusinessProfile), typeof(AutoMapperPresentationProfile));
 builder.Services.AddScoped<IVisaService, VisaService>();
 builder.Services.AddScoped<IBaggageService, BaggageService>();
 builder.Services.AddScoped<ITicketService, TicketService>();

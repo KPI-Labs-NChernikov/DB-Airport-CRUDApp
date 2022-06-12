@@ -16,9 +16,11 @@ namespace Business.Models
         public string? Type { get; set; }
 
         [Required]
+        [Display(Name = "Passenger")]
         public int PassengerId { get; set; }
 
         [Required]
+        [Display(Name = "Flight")]
         public int FlightId { get; set; }
     }
 }

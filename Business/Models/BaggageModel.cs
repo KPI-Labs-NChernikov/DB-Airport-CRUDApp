@@ -20,7 +20,7 @@ namespace Business.Models
         public decimal Price { get; set; }
 
         [Required]
-        [Display(Name = "Ticket Id")]
+        [Display(Name = "Ticket")]
         public int TicketId { get; set; }
     }
 }

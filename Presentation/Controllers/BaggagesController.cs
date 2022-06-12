@@ -1,7 +1,9 @@
-﻿using Business.Interfaces;
+﻿using AutoMapper;
+using Business.Interfaces;
 using Business.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Presentation.Models;
 
 namespace Presentation.Controllers
 {
@@ -9,9 +11,20 @@ namespace Presentation.Controllers
     {
         private readonly IBaggageService _service;
 
-        public BaggagesController(IBaggageService service)
+        private readonly ITicketService _ticketService;
+
+        private readonly IMapper _mapper;
+
+        public BaggagesController(IBaggageService service, ITicketService ticketService, IMapper mapper)
         {
             _service = service;
+            _ticketService = ticketService;
+            _mapper = mapper;
+        }
+
+        private void SetTickets()
+        {
+            ViewBag.Tickets = _mapper.Map<IEnumerable<TicketReduced>>(_ticketService.GetAll());
         }
 
         public IActionResult Index()
@@ -29,6 +42,7 @@ namespace Presentation.Controllers
 
         public ActionResult Create()
         {
+            SetTickets();
             return View();
         }
 
@@ -37,7 +51,10 @@ namespace Presentation.Controllers
         public async Task<IActionResult> Create(BaggageModel model)
         {
             if (!ModelState.IsValid)
+            {
+                SetTickets();
                 return View(model);
+            }
             try
             {
                 await _service.AddAsync(model);
@@ -46,11 +63,13 @@ namespace Presentation.Controllers
             }
             catch (DbUpdateException exc)
             {
+                SetTickets();
                 TempData[Constants.ErrorFieldName] = exc.InnerException != null ? exc.InnerException.Message : exc.Message;
                 return View(model);
             }
             catch (ArgumentException exc)
             {
+                SetTickets();
                 TempData[Constants.ErrorFieldName] = exc.Message;
                 return View(model);
             }
@@ -61,6 +80,7 @@ namespace Presentation.Controllers
             var model = await _service.GetByIdAsync(id);
             if (model is null)
                 return RedirectToAction("PageNotFound", "Home");
+            SetTickets();
             return View(model);
         }
 
@@ -69,7 +89,10 @@ namespace Presentation.Controllers
         public async Task<IActionResult> Edit(int id, BaggageModel model)
         {
             if (!ModelState.IsValid)
+            {
+                SetTickets();
                 return View(model);
+            }
             model.Id = id;
             try
             {
@@ -79,11 +102,13 @@ namespace Presentation.Controllers
             }
             catch (DbUpdateException exc)
             {
+                SetTickets();
                 TempData[Constants.ErrorFieldName] = exc.InnerException != null ? exc.InnerException.Message : exc.Message;
                 return View(model);
             }
             catch (ArgumentException exc)
             {
+                SetTickets();
                 TempData[Constants.ErrorFieldName] = exc.Message;
                 return View(model);
             }

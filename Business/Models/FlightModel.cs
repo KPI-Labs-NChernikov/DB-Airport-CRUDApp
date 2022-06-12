@@ -15,9 +15,11 @@ namespace Business.Models
         public DateTime Date { get; set; }
 
         [Required]
+        [Display(Name = "Plane")]
         public int PlaneId { get; set; }
 
         [Required]
+        [Display(Name = "Terminal")]
         public int TerminalId { get; set; }
     }
 }
