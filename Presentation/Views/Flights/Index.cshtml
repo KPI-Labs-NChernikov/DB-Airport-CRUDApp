@@ -29,8 +29,8 @@
     </h5>
     <p class="card-text">Destination: @flight.To<br />
         Date: @flight.Date<br />
-        Plane Id: @flight.PlaneId<br />
-        <a title="Terminal" asp-controller="Terminals" asp-action="Details" asp-route-id="@flight.TerminalId">Terminal Id: @flight.TerminalId</a></p>
+        <a title="Plane" asp-controller="Planes" asp-action="Details" asp-route-id="@flight.PlaneId">Plane</a><br />
+        <a title="Terminal" asp-controller="Terminals" asp-action="Details" asp-route-id="@flight.TerminalId">Terminal</a></p>
   </div>
 </div>
         }
