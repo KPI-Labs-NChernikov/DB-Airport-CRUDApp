@@ -36,7 +36,6 @@
             <div class="form-group mb-3">
                             <label asp-for="TicketId" class="control-label"></label>
             <select asp-for="TicketId" asp-items="@(new SelectList(ViewBag.Tickets, nameof(IReducedModel.Id), nameof(IReducedModel.Info)))" class="form-select">
-                <option>Select an option</option>
             </select>
             <span asp-validation-for="TicketId" class="text-danger"></span>
             </div>
